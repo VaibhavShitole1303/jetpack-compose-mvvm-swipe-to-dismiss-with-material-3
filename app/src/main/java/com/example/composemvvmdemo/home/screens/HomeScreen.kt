@@ -7,11 +7,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(emailViewModel: EmailViewModel ) {
+fun HomeScreen(emailViewModel: EmailViewModel,navController: NavController) {
     // Collect the state of messages from the view model
     val messages by emailViewModel.messagesState.collectAsState()
 
@@ -26,6 +27,12 @@ fun HomeScreen(emailViewModel: EmailViewModel ) {
                         // Refresh button
                         IconButton(onClick = emailViewModel::refresh) {
                             Icon(Icons.Filled.Refresh, contentDescription = "Refresh")
+                        }
+
+                        Button(onClick = {
+                            navController.navigate("second")
+                        }) {
+                            Text("Go to Second Screen")
                         }
                     }
                 )
